@@ -41,6 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
       return new BCryptPasswordEncoder();
    }
 
+   //总体配置
    @Override
    protected void configure(HttpSecurity http) throws Exception {
       http.authorizeRequests()

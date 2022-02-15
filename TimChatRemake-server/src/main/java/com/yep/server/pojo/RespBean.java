@@ -1,11 +1,17 @@
 package com.yep.server.pojo;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * 接口返回的公共实体类
  * @author HuangSir
  * @date
  */
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class RespBean {
   private Integer status;//状态码
   private String msg;//返回消息
@@ -29,40 +35,5 @@ public class RespBean {
     return new RespBean(500,msg,obj);
   }
 
-  private RespBean(){
 
-  }
-
-  private RespBean(Integer status, String msg, Object obj) {
-    this.status = status;
-    this.msg = msg;
-    this.obj = obj;
-  }
-
-  public Integer getStatus() {
-    return status;
-  }
-
-  public RespBean setStatus(Integer status) {
-    this.status = status;
-    return this;
-  }
-
-  public String getMsg() {
-    return msg;
-  }
-
-  public RespBean setMsg(String msg) {
-    this.msg = msg;
-    return this;
-  }
-
-  public Object getObj() {
-    return obj;
-  }
-
-  public RespBean setObj(Object obj) {
-    this.obj = obj;
-    return this;
-  }
 }

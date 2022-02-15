@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Slf4j
-public class UserServiceImpl implements UserDetailsService {
+public class UserServiceImpl implements UserService,UserDetailsService {
    @Autowired(required = true)
    private UserMapper userMapper;
    @Override
