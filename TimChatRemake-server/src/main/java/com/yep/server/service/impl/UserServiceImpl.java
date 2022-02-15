@@ -26,4 +26,14 @@ public class UserServiceImpl implements UserService,UserDetailsService {
       log.debug("查到的用户数据为：{}",user);
       return  user;
    }
+
+   @Override
+   public void setUserStateToOn(Integer id) {
+      userMapper.setUserStateToOn(id);
+   }
+
+   @Override
+   public void setUserStateToLeave(Integer id) {
+      userMapper.setUserStateToLeave(id);
+   }
 }

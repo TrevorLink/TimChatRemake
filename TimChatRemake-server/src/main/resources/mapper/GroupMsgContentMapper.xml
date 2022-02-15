@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yep.server.mapper.GroupMsgContentMapper">
+
+    <!--新增群聊消息记录-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into tim_remake.group_msg_content(from_id, from_name, from_profile, create_time, content, message_type_id)
+        values (#{fromId}, #{fromName}, #{fromProfile}, #{createTime}, #{content}, #{messageTypeId})
+    </insert>
+</mapper>

@@ -50,7 +50,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
    //忽略"/login","/verifyCode"请求，该请求不需要进入Security的拦截器
    @Override
    public void configure(WebSecurity web) throws Exception {
-      web.ignoring().antMatchers("/login", "/verifyCode");
+      web.ignoring().antMatchers(
+              "/login",
+              "/verifyCode",
+              "/ws/**"
+              );
    }
 
    //总体配置

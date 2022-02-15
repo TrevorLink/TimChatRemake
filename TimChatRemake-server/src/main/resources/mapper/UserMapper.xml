@@ -17,4 +17,12 @@
         from tim_remake.user
         where username = #{username}
     </select>
+    <!--用户登录后设置用户的状态为在线-->
+    <update id="setUserStateToOn">
+        update tim_remake.user set user_state_id=1 where id=#{id}
+    </update>
+    <!--用户登出后设置用户的状态为离线-->
+    <update id="setUserStateToLeave">
+        update tim_remake.user set user_state_id=2 where id=#{id}
+    </update>
 </mapper>

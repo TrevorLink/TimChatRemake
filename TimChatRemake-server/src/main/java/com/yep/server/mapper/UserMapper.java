@@ -15,4 +15,8 @@ public interface UserMapper {
     * @return
     */
    User loadUserByUsername(String username);
+
+   void setUserStateToOn(Integer id);
+
+   void setUserStateToLeave(Integer id);
 }
