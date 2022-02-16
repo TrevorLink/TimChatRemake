@@ -13,3 +13,7 @@ logging:
     com.yep.server.controller: debug
     com.yep.server.service: debug
     com.yep.server.mapper: debug
+    com.yep.server.utils: debug
+fastdfs:
+  nginx:
+    host: http://192.168.111.135/
