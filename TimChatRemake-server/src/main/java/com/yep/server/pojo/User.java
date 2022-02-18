@@ -1,5 +1,8 @@
 package com.yep.server.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,7 +16,7 @@ import java.util.Collection;
  */
 @ToString
 public class User  implements UserDetails {
-
+    @TableId(type=IdType.AUTO)
     private Integer id;
     /**
     * 登录账号

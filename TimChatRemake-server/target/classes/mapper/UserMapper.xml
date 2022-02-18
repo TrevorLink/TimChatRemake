@@ -17,12 +17,44 @@
         from tim_remake.user
         where username = #{username}
     </select>
+    <!--根据关键词和是否锁定来查询用户分页数据-->
+    <select id="getAllUserByPage" resultType="com.yep.server.pojo.User">
+        select * from user where 1=1
+        <if test="keyword!=null and keyword!=''">
+            and nickname like concat('%',#{keyword},'%')
+        </if>
+        <if test="isLocked!=null">
+            and is_locked=#{isLocked}
+        </if>
+        <if test="page!=null and size!=null">
+            limit #{page},#{size}
+        </if>
+    </select>
+    <!--根据关键词和是否锁定来查询用户记录总数-->
+    <select id="getTotal" resultType="java.lang.Long">
+        select count(*) from user where 1=1
+        <if test="keyword!=null and keyword!=''">
+            and nickname like concat('%',#{keyword},'%')
+        </if>
+        <if test="isLocked!=null">
+            and is_locked=#{isLocked}
+        </if>
+    </select>
     <!--用户登录后设置用户的状态为在线-->
     <update id="setUserStateToOn">
-        update tim_remake.user set user_state_id=1 where id=#{id}
+        update tim_remake.user
+        set user_state_id=1
+        where id = #{id}
     </update>
     <!--用户登出后设置用户的状态为离线-->
     <update id="setUserStateToLeave">
-        update tim_remake.user set user_state_id=2 where id=#{id}
+        update tim_remake.user
+        set user_state_id=2
+        where id = #{id}
+    </update>
+    <update id="changeLockedStatus">
+        update user
+        set is_locked=#{islocked}
+        where id = #{id}
     </update>
 </mapper>

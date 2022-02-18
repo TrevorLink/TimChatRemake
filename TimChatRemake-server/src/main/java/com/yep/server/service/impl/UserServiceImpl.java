@@ -1,6 +1,9 @@
 package com.yep.server.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yep.server.mapper.UserMapper;
+import com.yep.server.pojo.RespPageBean;
 import com.yep.server.pojo.User;
 import com.yep.server.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -9,6 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 /**
  * @author HuangSir
@@ -16,7 +21,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Slf4j
-public class UserServiceImpl implements UserService,UserDetailsService {
+public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements UserService,UserDetailsService  {
    @Autowired(required = true)
    private UserMapper userMapper;
    @Override
@@ -35,5 +40,20 @@ public class UserServiceImpl implements UserService,UserDetailsService {
    @Override
    public void setUserStateToLeave(Integer id) {
       userMapper.setUserStateToLeave(id);
+   }
+
+   @Override
+   public RespPageBean getAllUserByPage(Integer page, Integer size, String keyword, Integer isLocked) {
+      if(page!=null && size!=null) page=(page-1)*size;//将前端返回的页数转化成数据库中的起始行数
+      //获取分页数据
+      List<User> userList = userMapper.getAllUserByPage(page,size,keyword,isLocked);
+      //获取用户数据的总行数
+      Long total = userMapper.getTotal(keyword,isLocked);
+      return new RespPageBean(total,userList);
+   }
+
+   @Override
+   public int changeLockedStatus(Integer id, Boolean isLocked) {
+      return  userMapper.changeLockedStatus(id,isLocked);
    }
 }

@@ -53,7 +53,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
       web.ignoring().antMatchers(
               "/login",
               "/verifyCode",
-              "/ws/**"
+              "/ws/**",
+              "/user/**"
               );
    }
 

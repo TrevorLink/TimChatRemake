@@ -5,9 +5,6 @@ spring:
     username: root
     password: 123456
 #mapper文件位置配置
-mybatis:
-  mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.yep.server.pojo
 logging:
   level:
     com.yep.server.controller: debug
@@ -17,3 +14,8 @@ logging:
 fastdfs:
   nginx:
     host: http://192.168.111.135/
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.yep.server.pojo
+  configuration:
+    map-underscore-to-camel-case: true
