@@ -86,7 +86,7 @@ public class GroupMsgContentController {
     * @return
     */
    @DeleteMapping("/")
-   public RespBean deleteGroupMsgContentByIds(@RequestParam("ids") Integer[] ids) {
+   public RespBean deleteGroupMsgContentByIds( Integer[] ids) {
       boolean remove = groupMsgContentService.removeByIds(Arrays.asList(ids));
       if (remove) return RespBean.ok("批量删除群聊消息成功！");
       else return RespBean.error("批量删除群聊消息失败！");
