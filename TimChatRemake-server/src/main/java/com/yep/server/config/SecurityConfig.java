@@ -54,7 +54,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
               "/login",
               "/verifyCode",
               "/ws/**",
-              "/user/**"
+              //为了便于接口测试这边先全部放行
+              "/user/**",
+              "/groupMsgContent/**"
               );
    }
 

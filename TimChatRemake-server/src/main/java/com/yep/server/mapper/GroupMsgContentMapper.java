@@ -1,5 +1,6 @@
 package com.yep.server.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.yep.server.pojo.GroupMsgContent;
 import org.springframework.stereotype.Repository;
 
@@ -8,6 +9,6 @@ import org.springframework.stereotype.Repository;
  * @date 2022-02-15 16:30
  */
 @Repository
-public interface GroupMsgContentMapper {
+public interface GroupMsgContentMapper extends BaseMapper<GroupMsgContent> {
    int insert(GroupMsgContent groupMsgContent);
 }
