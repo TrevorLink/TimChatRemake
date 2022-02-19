@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.yep.server.pojo.RespPageBean;
 import com.yep.server.pojo.User;
 
+import java.util.List;
+
 /**
  * @author HuangSir
  * @date 2022-02-14 23:48
@@ -17,4 +19,6 @@ public interface UserService  extends IService<User> {
    RespPageBean getAllUserByPage(Integer page, Integer size, String keyword, Integer isLocked);
 
    int changeLockedStatus(Integer id, Boolean isLocked);
+
+   List<User> getAllUsersWithoutCurrentUser();
 }

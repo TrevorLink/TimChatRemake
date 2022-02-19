@@ -1,5 +1,6 @@
 package com.yep.server.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yep.server.mapper.UserMapper;
@@ -8,6 +9,7 @@ import com.yep.server.pojo.User;
 import com.yep.server.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -55,5 +57,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
    @Override
    public int changeLockedStatus(Integer id, Boolean isLocked) {
       return  userMapper.changeLockedStatus(id,isLocked);
+   }
+
+   @Override
+   public List<User> getAllUsersWithoutCurrentUser() {
+      //获取到当前登录的用户对象
+      User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+      Integer id = user.getId();
+      QueryWrapper<User> wrapper = new QueryWrapper<>();
+      wrapper.ne("id",id);
+      return userMapper.selectList(wrapper);
    }
 }
