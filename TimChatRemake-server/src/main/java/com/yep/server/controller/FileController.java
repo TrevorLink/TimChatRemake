@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 /**
+ * 聊天发送图片上传到FastDFS文件服务器存储
  * @author HuangSir
  * @date 2022-02-16 20:14
  */

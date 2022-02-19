@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
+ * 群聊消息接口
  * @author HuangSir
  * @date 2022-02-18 15:33
  */
