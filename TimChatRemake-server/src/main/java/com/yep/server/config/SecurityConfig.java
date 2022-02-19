@@ -56,7 +56,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
               "/ws/**",
               //为了便于接口测试这边先全部放行
               "/user/**",
-              "/groupMsgContent/**"
+              "/groupMsgContent/**",
+              "/file"
               );
    }
 
