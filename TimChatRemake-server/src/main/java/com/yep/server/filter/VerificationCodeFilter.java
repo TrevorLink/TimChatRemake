@@ -45,8 +45,29 @@ public class VerificationCodeFilter extends GenericFilter {
             writer.flush();
             writer.close();
          }
-      } else {
-         chain.doFilter(request, response);
+      } else if ("POST".equals(httpServletRequest.getMethod())&&"/admin/doLogin".equals(httpServletRequest.getServletPath())){
+         //获取输入的验证码
+         String mailCode = request.getParameter("mailCode");
+         //获取session中保存的验证码
+         String verifyCode = ((String) httpServletRequest.getSession().getAttribute("admin_verifyCode"));
+         //构建响应输出流
+         response.setContentType("application/json;charset=utf-8");
+         PrintWriter printWriter =response.getWriter();
+         try {
+            if(!mailCode.equals(verifyCode)){
+               printWriter.write(new ObjectMapper().writeValueAsString(RespBean.error("验证码错误！")));
+            }else {
+               chain.doFilter(request,response);
+            }
+         }catch (NullPointerException e){
+            printWriter.write(new ObjectMapper().writeValueAsString(RespBean.error("请求异常，请重新请求！")));
+         }finally {
+            printWriter.flush();
+            printWriter.close();
+         }
+      }
+      else {
+         chain.doFilter(request,response);
       }
    }
 }

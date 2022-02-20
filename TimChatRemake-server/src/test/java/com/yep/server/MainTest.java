@@ -15,6 +15,7 @@ public class MainTest {
    @Test
    public void testPassword(){
 //      System.out.println(passwordEncoder.matches("123", "$10$oE39aG10kB/rFu2vQeCJTu/V/v4n6DRR0f8WyXRiAYvBpmadoOBE."));
-      System.out.println(passwordEncoder.encode("123456"));
+//      System.out.println(passwordEncoder.encode("123456"));
+      System.out.println(passwordEncoder.encode("admin"));
    }
 }

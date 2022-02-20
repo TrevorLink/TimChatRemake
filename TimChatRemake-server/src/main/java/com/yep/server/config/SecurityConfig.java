@@ -3,6 +3,7 @@ package com.yep.server.config;
 import com.yep.server.filter.VerificationCodeFilter;
 import com.yep.server.pojo.User;
 import com.yep.server.service.UserService;
+import com.yep.server.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,10 +23,10 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
  * @author HuangSir
  * @date 2022-02-14 23:49
  */
-@Configuration
+//@Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
    @Autowired
-   private UserDetailsService userDetailsService;
+   private UserServiceImpl userDetailsService;
    @Autowired
    private AuthenticationSuccessHandler successHandler;
    @Autowired

@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * 自定义认证成功的处理器
+ * 自定义普通用户认证成功的处理器
  * @author HuangSir
  * @date 2022-02-15 0:03
  */

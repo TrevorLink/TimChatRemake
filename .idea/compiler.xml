@@ -7,15 +7,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="TimChatRemake-mail" />
         <module name="TimChatRemake-server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="TimChatRemake-mail" target="1.8" />
       <module name="TimChatRemake-server" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="TimChatRemake-mail" options="-parameters" />
       <module name="TimChatRemake-server" options="-parameters" />
     </option>
   </component>

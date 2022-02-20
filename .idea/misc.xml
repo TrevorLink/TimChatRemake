@@ -4,6 +4,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/TimChatRemake-server/pom.xml" />
+        <option value="$PROJECT_DIR$/TimChatRemake-mail/pom.xml" />
       </list>
     </option>
   </component>
