@@ -1,6 +1,7 @@
 package com.yep.server.controller;
 
 import com.yep.server.pojo.Admin;
+import com.yep.server.pojo.RespBean;
 import com.yep.server.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,11 @@ public class AdminController {
    private AdminService adminService;
 
    @RequestMapping("selectOne")
-   public Admin selectOne(Integer id){
-      return adminService.getById(id);
+   public RespBean selectOne(Integer id){
+      Admin admin = adminService.getById(id);
+      if (admin==null) {
+         return RespBean.error("该管理员不存在！");
+      }
+      return RespBean.ok("",admin);
    }
 }

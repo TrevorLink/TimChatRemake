@@ -49,8 +49,12 @@ public class GroupMsgContentController {
     * @return
     */
    @GetMapping("selectOne")
-   public GroupMsgContent selectOne(Integer id) {
-      return groupMsgContentService.getById(id);
+   public RespBean selectOne(Integer id) {
+      GroupMsgContent content = groupMsgContentService.getById(id);
+      if (content==null){
+         return RespBean.error("该群聊消息不存在！");
+      }
+      return RespBean.ok("",content);
    }
 
    /**

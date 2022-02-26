@@ -52,12 +52,12 @@ public class LoginController {
    @GetMapping("/admin/mailVerifyCode")
    public RespBean getAndSendAdminVerifyCodeMail(HttpSession session) {
       //生成随机验证码
-      String admin_verifyCode = verifyCodeService.getCode();
-      log.debug("管理端登录的验证码是：{}",admin_verifyCode);
+      String adminVerifyCode = verifyCodeService.getCode();
+      log.debug("管理端登录的验证码是：{}",adminVerifyCode);
       //保存到Session中
-      session.setAttribute("admin_verifyCode", admin_verifyCode);
+      session.setAttribute("admin_verifyCode", adminVerifyCode);
       //根据验证码发送邮件
-      verifyCodeService.sendVerifyCodeEmail();
+      verifyCodeService.sendVerifyCodeEmail(adminVerifyCode);
       return  RespBean.ok("邮件发送成功！");
    }
 }

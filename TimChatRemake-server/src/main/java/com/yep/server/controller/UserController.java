@@ -35,15 +35,19 @@ public class UserController {
     * @return
     */
    @PostMapping("/register")
-   public RespBean addUser(User user) {
+   public RespBean addUser(@RequestBody User user) {
+      log.debug("获取到的用户对象：{}",user);
       BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
       //对用户密码进行加密后存入数据库
       user.setPassword(encoder.encode(user.getPassword()));
       user.setUserStateId(2);
       user.setEnabled(true);
       user.setLocked(false);
-      if (userService.save(user)) return RespBean.ok("注册成功！");
-      else return RespBean.error("注册失败！");
+      if (userService.save(user)) {
+         return RespBean.ok("注册成功！");
+      } else {
+         return RespBean.error("注册失败！");
+      }
    }
 
    /**
@@ -81,10 +85,14 @@ public class UserController {
     * @return
     */
    @GetMapping("selectOne")
-   public User selectOne(Integer id) {
+   public RespBean selectOne(Integer id) {
       QueryWrapper wrapper = new QueryWrapper();
       wrapper.eq("id", id);
-      return userService.getOne(wrapper);
+      User user = userService.getOne(wrapper);
+      if(user==null){
+         return RespBean.error("该用户不存在！");
+      }
+      return RespBean.ok("",user);
    }
 
    /**
@@ -104,8 +112,12 @@ public class UserController {
       log.debug("size:{}",size);
       Page<User> pageModel = new Page<>(page, size);
       QueryWrapper<User> wrapper = new QueryWrapper<>();
-      if (isLocked != null) wrapper.eq("is_locked", isLocked);
-      if (keyword != null) wrapper.like("nickname", keyword);
+      if (isLocked != null) {
+         wrapper.eq("is_locked", isLocked);
+      }
+      if (keyword != null) {
+         wrapper.like("nickname", keyword);
+      }
       Page<User> pageRes = userService.page(pageModel, wrapper);
       List<User> users = pageRes.getRecords();
       long count = userService.count(wrapper);

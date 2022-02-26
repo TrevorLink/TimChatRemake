@@ -4,6 +4,12 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     username: root
     password: 123456
+  rabbitmq:
+    #生产者消息自动确认
+    listener:
+      simple:
+        acknowledge-mode: manual
+        prefetch: 100
 #mapper文件位置配置
 logging:
   level:
@@ -11,11 +17,17 @@ logging:
     com.yep.server.service: debug
     com.yep.server.mapper: debug
     com.yep.server.utils: debug
+  file:
+       path: G:\workspace\workspace_myIdea\TimChatRemake\TimChatRemake-server\logs #本机环境
+#    path: /usr/local/springboot/TimRemake/logs 服务器
 fastdfs:
   nginx:
-    host: http://192.168.111.135/
+    host: http://192.168.111.135/ #本机环境
+#       host: http://127.0.0.1 #服务器
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.yep.server.pojo
   configuration:
     map-underscore-to-camel-case: true
+server:
+  port: 8082 #和前端对接

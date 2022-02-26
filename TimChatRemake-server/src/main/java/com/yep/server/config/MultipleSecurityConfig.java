@@ -2,10 +2,7 @@ package com.yep.server.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yep.server.filter.VerificationCodeFilter;
-import com.yep.server.handler.AdminAuthenticationSuccessHandler;
-import com.yep.server.handler.MyAuthenticationFailureHandler;
-import com.yep.server.handler.MyAuthenticationSuccessHandler;
-import com.yep.server.handler.MyLogoutSuccessHandler;
+import com.yep.server.handler.*;
 import com.yep.server.pojo.Admin;
 import com.yep.server.pojo.RespBean;
 import com.yep.server.service.UserService;
@@ -58,9 +55,11 @@ public class MultipleSecurityConfig {
       @Autowired
       MyAuthenticationFailureHandler myAuthenticationFailureHandler;
       @Autowired
-      MyLogoutSuccessHandler myLogoutSuccessHandler;
-      @Autowired
       AdminAuthenticationSuccessHandler adminAuthenticationSuccessHandler;
+      @Autowired
+      AdminLogoutSuccessHandler adminLogoutSuccessHandler;
+      @Autowired
+      public   AuthenticationEntryPoint authenticationEntryPoint;
 
       //管理员登录的用户名和密码验证服务
       @Override
@@ -95,17 +94,12 @@ public class MultipleSecurityConfig {
                  //登出处理
                  .logout()
                  .logoutUrl("/admin/logout")
-                 .logoutSuccessHandler(myLogoutSuccessHandler)
+                 .logoutSuccessHandler(adminLogoutSuccessHandler)
                  .permitAll()
                  .and()
                  .csrf().disable()//关闭csrf防御方便调试
                  //没有认证时，在这里处理结果，不进行重定向到login页
-                 .exceptionHandling().authenticationEntryPoint(new AuthenticationEntryPoint() {
-            @Override
-            public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
-               httpServletResponse.setStatus(401);
-            }
-         });
+                 .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint);
       }
    }
    @Configuration
@@ -121,7 +115,8 @@ public class MultipleSecurityConfig {
       private MyAuthenticationFailureHandler myAuthenticationFailureHandler;
       @Autowired
       private  MyLogoutSuccessHandler myLogoutSuccessHandler;
-
+      @Autowired
+      public   AuthenticationEntryPoint authenticationEntryPoint;
       //验证服务，设置从数据库中读取普通用户信息
       @Override
       protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -129,11 +124,11 @@ public class MultipleSecurityConfig {
       }
 
 
-      //忽略"/login","/verifyCode"请求，该请求不需要进入Security的拦截器
-      @Override
-      public void configure(WebSecurity web) throws Exception {
-         web.ignoring().antMatchers("/login","/verifyCode","/file","/user/register","/user/checkUsername","/user/checkNickname");
-      }
+         //忽略"/login","/verifyCode"请求，该请求不需要进入Security的拦截器
+         @Override
+         public void configure(WebSecurity web) throws Exception {
+            web.ignoring().antMatchers("/login","/verifyCode","/file","/user/register","/user/checkUsername","/user/checkNickname");
+         }
       //登录验证
       @Override
       protected void configure(HttpSecurity http) throws Exception {
@@ -161,12 +156,7 @@ public class MultipleSecurityConfig {
                  .and()
                  .csrf().disable()//关闭csrf防御方便调试
                  //没有认证时，在这里处理结果，不进行重定向到login页
-                 .exceptionHandling().authenticationEntryPoint(new AuthenticationEntryPoint() {
-            @Override
-            public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
-               httpServletResponse.setStatus(401);
-            }
-         });
+                 .exceptionHandling().authenticationEntryPoint( authenticationEntryPoint);
       }
    }
 }

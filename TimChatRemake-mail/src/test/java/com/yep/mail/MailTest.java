@@ -20,6 +20,21 @@ public class MailTest {
    public JavaMailSender javaMailSender;
    @Value("${spring.mail.username}")
    private  String from;
+   @Value("${mail.exchange:mail-exchange}")
+   private String mailExchange;
+
+   @Value("${mail.queue.verifyCode:mail-queue-verifyCode}")
+   private String mailQueueVerifyCode;
+
+   @Value("${mail.route.verifyCode:mail-route-verifyCode}")
+   private String mailRouteVerifyCode;
+
+   @Value("${mail.queue.feedback:mail-queue-feedback}")
+   private String mailQueueFeedback;
+
+   @Value("${mail.route.feedback:mail-route-feedback}")
+   private String mailRouteFeedback;
+
    //测试邮件发送（只能在本地跑，服务器好像八行）
    @Test
    public  void testMailSend(){
@@ -35,5 +50,13 @@ public class MailTest {
       //邮件接收方
       msg.setTo("2845964844@qq.com");
       javaMailSender.send(msg);
+   }
+   @Test
+   public void testValue(){
+      System.out.println("交换机名称："+mailExchange);
+      System.out.println("验证码队列名"+mailQueueVerifyCode);
+      System.out.println("反馈信息队列名"+mailQueueFeedback);
+      System.out.println("验证码路由key"+mailRouteVerifyCode);
+      System.out.println("反馈信息路由key"+mailRouteFeedback);
    }
 }
