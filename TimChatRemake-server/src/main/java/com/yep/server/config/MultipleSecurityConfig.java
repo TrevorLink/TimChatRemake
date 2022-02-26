@@ -70,7 +70,7 @@ public class MultipleSecurityConfig {
       //忽略"/login","/verifyCode"请求，该请求不需要进入Security的拦截器
       @Override
       public void configure(WebSecurity web) throws Exception {
-         web.ignoring().antMatchers("/css/**","/fonts/**","/img/**","/js/**","/favicon.ico","/index.html","/admin/login","/admin/mailVerifyCode");
+         web.ignoring().antMatchers("/css/**","/fonts/**","/img/**","/js/**","/favicon.ico","/index.html","/admin/login","/admin/mailVerifyCode","/*.jpg");
       }
       //http请求验证和处理规则，响应处理的配置
       @Override

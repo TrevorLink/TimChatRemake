@@ -1,5 +1,6 @@
 package com.yep.server.controller;
 
+import com.github.binarywang.java.emoji.EmojiConverter;
 import com.yep.server.pojo.GroupMsgContent;
 import com.yep.server.pojo.Message;
 import com.yep.server.pojo.User;
@@ -27,6 +28,8 @@ public class WsController {
    private SimpMessagingTemplate simpMessagingTemplate;
    @Autowired
    private GroupMsgContentService groupMsgContentService;
+//   @Autowired
+//   private EmojiConverter emojiConverter;
    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
    /**
@@ -41,6 +44,8 @@ public class WsController {
       User user = (User) authentication.getPrincipal();
       log.debug("当前登录的用户信息：{}", user);
       log.debug("接受到前端传来的群聊消息：{}", groupMsgContent);
+      //设置Emoji内容,转换成unicode编码
+//      groupMsgContent.setContent(emojiConverter.toHtml(groupMsgContent.getContent()));
       //设置转发的消息信息
       groupMsgContent.setFromId(user.getId());
       groupMsgContent.setFromName(user.getNickname());
@@ -55,6 +60,7 @@ public class WsController {
 
    /**
     * 单聊消息转发
+    *
     * @param authentication
     * @param message
     */
@@ -67,6 +73,6 @@ public class WsController {
       message.setFrom(user.getUsername());
       message.setCreateTime(new Date());
       message.setFromNickname(user.getNickname());
-      simpMessagingTemplate.convertAndSendToUser(message.getTo(),"/queue/chat",message);
+      simpMessagingTemplate.convertAndSendToUser(message.getTo(), "/queue/chat", message);
    }
 }

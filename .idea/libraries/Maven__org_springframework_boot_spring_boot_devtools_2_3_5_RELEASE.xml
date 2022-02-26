@@ -1,13 +1,13 @@
 <component name="libraryTable">
-  <library name="Maven: com.alibaba:fastjson:1.2.73">
+  <library name="Maven: org.springframework.boot:spring-boot-devtools:2.3.5.RELEASE">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../../DeveloperTools/Maven/repository/com/alibaba/fastjson/1.2.73/fastjson-1.2.73.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../DeveloperTools/Maven/repository/org/springframework/boot/spring-boot-devtools/2.3.5.RELEASE/spring-boot-devtools-2.3.5.RELEASE.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$PROJECT_DIR$/../../../DeveloperTools/Maven/repository/com/alibaba/fastjson/1.2.73/fastjson-1.2.73-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../DeveloperTools/Maven/repository/org/springframework/boot/spring-boot-devtools/2.3.5.RELEASE/spring-boot-devtools-2.3.5.RELEASE-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../../../DeveloperTools/Maven/repository/com/alibaba/fastjson/1.2.73/fastjson-1.2.73-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../DeveloperTools/Maven/repository/org/springframework/boot/spring-boot-devtools/2.3.5.RELEASE/spring-boot-devtools-2.3.5.RELEASE-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
