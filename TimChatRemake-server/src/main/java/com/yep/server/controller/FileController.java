@@ -40,8 +40,8 @@ public class FileController {
          log.debug("收到的文件名：{}", file.getOriginalFilename());
          String originalFilename = file.getOriginalFilename();
          file.transferTo(new File(realPath, originalFilename));
-         return "http://120.24.179.229:8082/"+originalFilename;
-//         return "http://localhost:8082/"+originalFilename;
+//         return "http://120.24.179.229:8082/"+originalFilename;
+         return "http://localhost:8082/"+originalFilename;
       }
       return "";
 //      String fileId = FastDFSUtil.upload(file);
